@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.4.5.css" />
+        <title>Online??</title>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script>
+function cargar(){
+	document.addEventListener("deviceready", onDeviceReady, false);
+	
+	
+}
+	
+	var d = new Date();
+	
+	function onDeviceReady() {
+		// Register the event listener
+		
+		alert("Ingrese su fecha de nacimiento");
+		//document.getElementById("ingreso").innerHTML += "<br> nueva linea";  // Agrego nueva linea antes
+	}
+	
+	function Calcular(){
+		//alert("O_O");
+		var DOb = document.formF.dia.value;
+		var MOb = document.formF.mes.value;
+		var AOb = document.formF.anio.value;
+		var diasAux=0;
+		
+		var Ar=d.getFullYear()-AOb;
+		var Mr=(d.getMonth()+1)-MOb;
+		var Dr=d.getDate()-DOb;
+		
+		switch(MOb){
+			case 0,2,3,4,5,7,9,11: diasAux=31;alert("Si se puede");
+			break;
+			case 1: 
+				diasAux=28;
+				if(d.getFullYear()%4===0){
+					diasAux=29;
+				}
+			break;
+			case 2: diasAux=31;
+			break;
+			case 3: diasAux=30;
+			break;
+			case 4: diasAux=31;
+			break;
+		}
+		if(Mr<0){
+			Ar-=1;
+			Mr=11+Mr;
+		}
+		document.getElementById("ingreso").innerHTML="calculando...<br> fecha ingresado:"+DOb+"/"+MOb+"/"+AOb+
+		"<br> fecha hoy:"+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getFullYear())+"<br>Tu tienes: <br>Dias: "+Dr+"<br>Meses: "+Mr+"<br>Años:"+Ar+
+		"<br><br>y tiempo:"
+		//alert(";-)");
+	}
+</script>
+    </head>
+    <body style="background:rgba(110,77,170,0.5)" onload=cargar();>
+        <div id="ingreso" class="ui-shadow" style="background:#FFF" style="padding:10px; border-radius:7px;">
+			<form method="post" id="formF" name="formF">
+				<p>Ingrese su fecha de nacimiento y obtendra el tiempo transcurrido:</p>
+				<label>Dia:</label><input type="number" name="dia" id="dia" required><br>
+				<label>Mes(1-12):</label><input type="number" name="mes" id="mes" required><br>
+				<label>Año:</label><input type="number" name="anio" id="anio" required>.
+				<br>
+				<input type="submit" name="calcula" id="calcula" value="calcular tiempo" onclick="Calcular(this);return false;">
+			</form>
+        </div>
+		<br>
+		<div>
+			
+		</div>
+		<br>
+        <div id="nueva" class="ui-shadow-isset">
+		</div>
+		
+    </body>
+</html>
